@@ -4,3 +4,4 @@
 /storage/*.key
 /vendor
 /config/database.php
+.env
