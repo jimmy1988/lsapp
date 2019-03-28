@@ -1,26 +1,45 @@
-<!doctype html>
-<html lang="{{ config('app.locale') }}">
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link type="text/css" rel="stylesheet" href="{{asset('css/app.css') }}" />
-      <title>{{$title}} - {{config('ap.name', 'LSAPP')}}</title>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!--SEO Here-->
 
-    </head>
-    <body>
-      @include('inc.navbar')
-      <div class="container">
-        @include('inc.messages')
-        @yield("content")
-      </div>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-      <script type="text/javascript" src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-      <script type="text/javascript">
-        if(document.getElementById('article-ckeditor')){
-          CKEDITOR.replace( 'article-ckeditor' );
-        }
-      </script>
-    </body>
+    <title>{{ config('app.name', 'LSAPP Laravel Tutorial') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+    <!--Imported Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!--Custom Styles -->
+    <link href="{{ asset('css/overrides.css') }}" rel="stylesheet">
+
+</head>
+<body>
+  <div id="app">
+    @include('inc.navbar')
+    <div class="container">
+      @include('inc.messages')
+      @yield("content")
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+  <script type="text/javascript">
+    if(document.getElementById('article-ckeditor')){
+      CKEDITOR.replace( 'article-ckeditor' );
+    }
+  </script>
+</body>
 </html>
