@@ -16,9 +16,11 @@
         @yield("content")
       </div>
 
-      <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-      <script>
+      <script type="text/javascript" src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+      <script type="text/javascript">
+        if(document.getElementById('article-ckeditor')){
           CKEDITOR.replace( 'article-ckeditor' );
+        }
       </script>
     </body>
 </html>
