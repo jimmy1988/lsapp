@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Post;
+use DB;
 
 use Illuminate\Http\Request;
 
@@ -13,7 +15,25 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view("posts.index");
+        $data['title'] = "Posts";
+        $data['description'] = "";
+
+        //return all data
+        // return Post::all();
+
+        //return only 1 record - all records ordered by created_at
+        // $data ['posts'] = Post::orderBy('created_at', 'desc')->take(1)->get();
+
+        //get al records - order by created_at descending
+        // $data ['posts'] = Post::orderBy('created_at', 'desc')->get();
+
+        //use the DB class to execute raw sql
+        // $data ['posts'] = DB::select('SELECT * FROM posts ORDER BY created_at DESC');
+
+        //enable pagination
+        $data ['posts'] = Post::orderBy('created_at', 'desc')->paginate(1);
+
+        return view("posts.index")->with($data);
     }
 
     /**
@@ -45,7 +65,10 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+      $data['title'] = "Posts";
+      $data['description'] = "";
+      $data['post'] = Post::find($id);
+      return view("posts.show")->with($data);
     }
 
     /**
@@ -56,7 +79,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
