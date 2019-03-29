@@ -14,6 +14,12 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+   public function __construct()
+   {
+       $this->middleware('auth', ['except' => ['index', 'show']]);
+   }
+
     public function index()
     {
         $data['title'] = "Posts";
@@ -36,10 +42,17 @@ class PostsController extends Controller
 
         // return view("posts.index")->with($data);
 
-        $user_id = auth()->user()->id;
-        $data['posts'] = Post::where('user_id', $user_id)->orderBy('created_at', 'desc')->paginate(5);
 
-        return view("posts.index")->with($data);
+        if(is_object(auth()->user()) && auth()->user()->id != null && !empty(auth()->user()->id)){
+          $user_id = auth()->user()->id;
+          // $data['posts'] = Post::where('user_id', $user_id)->orderBy('created_at', 'desc')->paginate(5);
+          $data['posts'] = Post::orderBy('created_at', 'desc')->paginate(5);
+
+          return view("posts.index")->with($data);
+        }else{
+          return redirect('/login');
+        }
+
     }
 
     /**
@@ -103,10 +116,21 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-      $data['title'] = "Edit Post";
-      $data['description'] = "";
-      $data['post'] = Post::find($id);
-      return view("posts.edit")->with($data);
+    
+      if(isset($id) && !empty($id)){
+        $data['title'] = "Edit Post";
+        $data['description'] = "";
+        $data['post'] = Post::find($id);
+
+        //check for correct user
+        if(auth()->user()->id != $data['post']->user_id){
+          return redirect("/posts")->with('error', 'Unauthorized Page');
+        }else{
+          return view("posts.edit")->with($data);
+        }
+      }else{
+        return redirect("/posts")->with('error', 'Unauthorized Page');
+      }
     }
 
     /**

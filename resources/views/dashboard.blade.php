@@ -13,15 +13,20 @@
                   @if (count($posts) > 0)
                     <table class="table tabe-stripped">
                       <tr>
-                        <td>Title</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <th>Title</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
                       </tr>
                       @foreach ($posts as $post)
                         <tr>
-                          <th>{{$post->title}}</th>
-                          <th><a href="posts/{{$post->id}}/edit">Edit</a></th>
-                          <th></th>
+                          <td>{{$post->title}}</td>
+                          <td><a href="posts/{{$post->id}}/edit" class="btn btn-default">Edit</a></td>
+                          <td>
+                            {!!Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'POST', 'class' =>'float-right'])!!}
+                            {{Form::hidden('_method', 'DELETE')}}
+                            {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                          {!!Form::close()!!}
+                        </td>
                         </tr>
                       @endforeach
 

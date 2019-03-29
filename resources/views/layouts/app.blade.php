@@ -29,10 +29,6 @@
     <!--Custom Styles -->
     <link href="{{ asset('css/overrides.css') }}" rel="stylesheet">
 
-    <!-- Scripts -->
-    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-
 </head>
 <body>
   <div id="app">
@@ -43,9 +39,11 @@
     </div>
   </div>
 
+  <!-- Scripts -->
+  <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
+  <script type="text/javascript" src="{{asset('/vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
+
   <!--Custom Scripts-->
-  <script>
-      CKEDITOR.replace( 'article-ckeditor' );
-  </script>
+  <script async defer type="text/javascript" src="{{asset('js/ckeditor.js')}}"></script>
 </body>
 </html>
