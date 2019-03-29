@@ -10,7 +10,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'LSAPP Laravel Tutorial') }}</title>
+    <title>
+      @if (isset($title) && !empty($title))
+      {{$title}}
+      @else
+      LSAPP
+      @endif
+       - LSAPP Laravel Tutorial'
+    </title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

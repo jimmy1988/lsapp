@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Post;
+use App\User;
 use DB;
 
 use Illuminate\Http\Request;
@@ -31,7 +32,12 @@ class PostsController extends Controller
         // $data ['posts'] = DB::select('SELECT * FROM posts ORDER BY created_at DESC');
 
         //enable pagination
-        $data ['posts'] = Post::orderBy('created_at', 'desc')->paginate(10);
+        // $data ['posts'] = Post::orderBy('created_at', 'desc')->paginate(10);
+
+        // return view("posts.index")->with($data);
+
+        $user_id = auth()->user()->id;
+        $data['posts'] = Post::where('user_id', $user_id)->orderBy('created_at', 'desc')->paginate(5);
 
         return view("posts.index")->with($data);
     }
@@ -71,7 +77,7 @@ class PostsController extends Controller
         $post->user_id = auth()->user()->id;
         $post->save();
 
-        return redirect('/posts')->with('success', 'Post Created');
+        return redirect('/dashboard')->with('success', 'Post Created');
 
     }
 
