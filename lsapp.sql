@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 28, 2019 at 05:01 PM
+-- Generation Time: Mar 29, 2019 at 04:10 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.2.14
 
@@ -36,7 +36,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (10, '2014_10_12_000000_create_users_table', 1),
 (11, '2014_10_12_100000_create_password_resets_table', 1),
 (12, '2019_03_27_142100_create_posts_table', 1),
-(14, '2019_03_28_164204_add_user_id_to_posts', 2);
+(14, '2019_03_28_164204_add_user_id_to_posts', 2),
+(15, '2019_03_29_144046_add_cover_image_to_posts', 3);
 
 -- --------------------------------------------------------
 
@@ -62,17 +63,9 @@ CREATE TABLE `posts` (
   `body` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `cover_image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`id`, `title`, `body`, `created_at`, `updated_at`, `user_id`) VALUES
-(1, 'Post One', 'This is the post body', '2019-03-28 09:36:20', '2019-03-28 09:36:20', 1),
-(2, 'Post Two', 'This is the post 2', '2019-03-28 09:36:44', '2019-03-28 09:36:44', 1),
-(3, 'Post Title 3', 'post body 3', '2019-03-28 14:45:37', '2019-03-28 14:45:37', 1);
 
 -- --------------------------------------------------------
 
@@ -96,7 +89,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'James McHugh', 'james.mchugh1988@gmail.com', NULL, '$2y$10$NrXACNOmQy.85XNFuIoMl.IV1yLJ68rO4H4NG6srVdAYo4lGDnyqW', 'zc4Ewf5ZEWAYyMWPXTIgpECwIJpL2E39ipVm3dNv9g4QNEgf4fHECtFUjPrb', '2019-03-28 16:35:02', '2019-03-28 16:35:02');
+(1, 'James McHugh', 'james.mchugh1988@gmail.com', NULL, '$2y$10$NrXACNOmQy.85XNFuIoMl.IV1yLJ68rO4H4NG6srVdAYo4lGDnyqW', '9sXZA6XALstQBrknZYhDbgOnssnkF0kSgFMk9X5LX8xhpTF6AhZ2PNY02aKU', '2019-03-28 16:35:02', '2019-03-28 16:35:02'),
+(2, 'John Doe', 'john.doe@gmail.com', NULL, '$2y$10$U8EN7pmwKcJz9KuNNWmNdO6qcSsvTgx7sA2q1JeyeOodfi5yzJ/0u', NULL, '2019-03-29 09:14:17', '2019-03-29 09:14:17');
 
 --
 -- Indexes for dumped tables
@@ -135,16 +129,16 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
